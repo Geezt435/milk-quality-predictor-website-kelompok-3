@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <title>Model Deployment FLASK</title>
+
+    <style>
+      .container-sm {
+        max-width: 800px;
+      }
+      .card-title {
+        text-align: center;
+        font-weight: bold;
+      }
+      .form-label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-sm mt-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Menebak Kualitas Susu</h5>
+
+          <form id="myForm" action="{{ url_for('prediksi') }}" method="POST">
+            <!-- <div class="mb-3">
+              <label for="pH" class="form-label">pH</label>
+              <input name="pH" id="pH" value="{{ request.form.pH or '0' }}" step="0.1" type="number" class="form-control" />
+            </div> -->
+            <!-- <div class="mb-3">
+              <label for="Temprature" class="form-label">Temprature</label>
+              <input name="Temprature" id="Temprature" value="{{ request.form.Temprature or '0' }}" step="0" type="number" class="form-control" />
+            </div> -->
+            <div class="mb-3">
+              <label for="Taste" class="form-label">Taste</label>
+              <input name="Taste" id="Taste" type="number" class="form-control" step="0" value="{{ request.form.Taste or '0' }}" />
+            </div>
+            <div class="mb-3">
+              <label for="Odor" class="form-label">Odor</label>
+              <input name="Odor" id="Odor" type="number" class="form-control" step="0" value="{{ request.form.Odor or '0' }}" />
+            </div>
+            <div class="mb-3">
+            <div class="mb-3">
+              <label for="Fat" class="form-label">Fat</label>
+              <input name="Fat" id="Fat" value="{{ request.form.Fat or '0' }}" step="0" type="number" class="form-control" />
+            </div>
+              <label for="Turbidity" class="form-label">Turbidity</label>
+              <input name="Turbidity" id="Turbidity" type="number" class="form-control" step="0" value="{{ request.form.Turbidity or '0' }}" />
+            </div>
+            <div class="mb-3">
+              <label for="Colour" class="form-label">Colour</label>
+              <input name="Colour" id="Colour" type="number" class="form-control" step="0001" value="{{ request.form.Colour or '0' }}" />
+            </div>
+
+            <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+            <button class="btn btn-secondary" id="reset" type="button">Mulai Ulang</button>
+          </form>
+
+          <div class="mb-3 mt-5" id="result_pred">
+            <label for="result" class="form-label">Hasil</label>
+            <input
+              type="text"
+              class="form-control"
+              name="result"
+              id="result"
+              value="{{ prediction }}"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        $('input[type="number"]').on('focus', function () {
+          if ($(this).val() === '0') {
+            $(this).val('');
+          }
+        }).on('blur', function () {
+          if ($(this).val() === '') {
+            $(this).val('0');
+          }
+        });
+
+        $('#reset').click(function () {
+          $('#Temprature').val('0');
+          $('#Fat').val('0');
+          $('#Odor').val('0');
+          $('#Turbidity').val('0');
+          $('#Taste').val('0');
+          $('#Colour').val('0');
+          $('#result').val('Liat Hasil di Sini');
+        });
+      });
+    </script>
+  </body>
+</html>
